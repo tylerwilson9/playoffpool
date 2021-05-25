@@ -16,7 +16,9 @@ def load_picks():
 
 def get_stats():
     goalies = pd.read_html(goalie_url,header=1,
-                           index_col='Player')[0][['W','SO']].astype('int')
+                           index_col='Player')[0]
+    goalies.drop(index='Player',inplace=True)
+    goalies = goalies[['W','SO']].astype('int')
     skaters = pd.read_html(skater_url,header=1,index_col='Player')[0][[
         'PTS']]
     skaters.drop(index='Player',inplace=True)
